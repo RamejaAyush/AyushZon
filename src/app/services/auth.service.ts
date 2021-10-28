@@ -29,7 +29,7 @@ export class AuthService {
         'loginStatus',
         JSON.stringify(this.currentLoginValue)
       );
-      this.userName = enteredName;
+      this.userName = enteredName.value;
       this.router.navigate(['dashboard']);
     }
   }

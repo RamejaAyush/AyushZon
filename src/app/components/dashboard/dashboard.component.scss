@@ -1,0 +1,26 @@
+section {
+  width: 100%;
+  min-height: 100vh;
+
+  .spacing {
+    width: 100%;
+    height: 10vh;
+  }
+
+  .header-dashboard {
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .products {
+    margin: 0 auto;
+    width: 95%;
+    min-height: 80vh;
+    padding: 0 2.5rem;
+    background-color: #f4f4f4;
+    border-radius: 15px;
+  }
+}
