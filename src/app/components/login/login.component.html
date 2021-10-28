@@ -1,0 +1,26 @@
+<section class="login">
+  <div class="header"></div>
+  <div class="form-container">
+    <div class="form">
+      <div class="form-header">
+        <h1>Enter Credentials</h1>
+      </div>
+      <div class="username">
+        <p>Username:</p>
+        <input type="text" #enteredName placeholder="Username" autofocus />
+      </div>
+      <div class="password">
+        <p>Password:</p>
+        <input type="password" #enteredPass placeholder="Password" />
+      </div>
+      <div class="button">
+        <button
+          (click)="AuthService.logIn(enteredName, enteredPass)"
+          class="login-btn"
+        >
+          Login
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
