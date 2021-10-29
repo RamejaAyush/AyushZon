@@ -38,12 +38,10 @@ export class ItemsService {
       };
       this.Items.push(item);
       localStorage.setItem('items', JSON.stringify(this.Items));
-      alert('changes are saved in localstorage');
       enteredName.value = '';
       enteredDesc.value = '';
       enteredPrice.value = 0;
       this.router.navigate(['dashboard']);
-      alert('task is created');
     }
   }
 
@@ -51,17 +49,27 @@ export class ItemsService {
     const index = this.Items.indexOf(item);
     this.Items.splice(index, 1);
     localStorage.setItem('items', JSON.stringify(this.Items));
-    alert('Item removed');
   }
 
   changeEditState() {
     this.itemEditable = !this.itemEditable;
   }
 
-  editItem(item: ITEM) {
-    const index = this.Items.indexOf(item);
-    console.log(this.Items[index]);
-    // localStorage.setItem('items', JSON.stringify(this.Items));
-    // this.itemEditable = false;
+  editItem(item: ITEM, id, Ename, Edesc, Eprice) {
+    if (
+      id.value == null ||
+      Ename.value == '' ||
+      Edesc.value == '' ||
+      Eprice.value == null
+    ) {
+      alert('Enter Valid Values');
+    } else {
+      let index: number = id.value - 1;
+      this.Items[index].name = Ename.value;
+      this.Items[index].desc = Edesc.value;
+      this.Items[index].price = Eprice.value;
+      localStorage.setItem('items', JSON.stringify(this.Items));
+      this.itemEditable = false;
+    }
   }
 }

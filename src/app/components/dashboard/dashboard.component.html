@@ -2,13 +2,18 @@
   <div class="spacing"></div>
   <div class="header-dashboard">
     <!-- <h1>Welcome {{ AuthService.userName }}!</h1> -->
-    <h1>
-      {{ ItemService.newName }} {{ ItemService.newDesc }}
-      {{ ItemService.newPrice }}
-    </h1>
+    <h1>Welcome {{ AuthService.userName }}</h1>
     <button (click)="goToAdd()">Add Item</button>
   </div>
-  <div class="products">
+  <div class="nomessage" *ngIf="ItemService.Items.length == 0">
+    <div class="text">
+      <h1>No Product to display</h1>
+    </div>
+    <div class="btns">
+      <button (click)="goToAdd()">Add Product</button>
+    </div>
+  </div>
+  <div class="products" *ngIf="ItemService.Items.length !== 0">
     <div class="indicator">
       <div class="id">
         <p>Id</p>
@@ -27,57 +32,50 @@
       </div>
     </div>
     <div class="pro" *ngFor="let item of ItemService.Items">
+      <div class="edit-item" *ngIf="ItemService.itemEditable">
+        <div class="edit-header">
+          <h1>Edit Item</h1>
+        </div>
+        <div class="id">
+          <input type="number" #id placeholder="ID" />
+        </div>
+        <div class="name">
+          <input type="text" #name placeholder="Enter New Name" />
+        </div>
+        <div class="desc">
+          <input type="text" #desc placeholder="Enter New Description" />
+        </div>
+        <div class="price">
+          <input type="number" #price placeholder="Enter New Price" />
+        </div>
+        <div class="btn">
+          <button
+            class="save"
+            (click)="ItemService.editItem(item, id, name, desc, price)"
+          >
+            Save
+          </button>
+          <button class="close" (click)="ItemService.changeEditState()">
+            Close
+          </button>
+        </div>
+      </div>
       <div class="id">
         <p>{{ item.id }}.</p>
       </div>
       <div class="name">
-        <input
-          *ngIf="ItemService.itemEditable"
-          type="text"
-          [(ngModel)]="ItemService.newName"
-          placeholder="Enter New Name"
-        />
-        <p *ngIf="!ItemService.itemEditable">{{ item.name }}</p>
+        <p>{{ item.name }}</p>
       </div>
       <div class="desc">
-        <input
-          *ngIf="ItemService.itemEditable"
-          type="text"
-          [(ngModel)]="ItemService.newDesc"
-          placeholder="Enter New Description"
-        />
-        <p *ngIf="!ItemService.itemEditable">{{ item.desc }}</p>
+        <p>{{ item.desc }}</p>
       </div>
       <div class="price">
-        <input
-          *ngIf="ItemService.itemEditable"
-          type="number"
-          [(ngModel)]="ItemService.newPrice"
-          placeholder="Enter New Price"
-        />
-        <p *ngIf="!ItemService.itemEditable">Rs {{ item.price }}</p>
+        <p>Rs {{ item.price }}</p>
       </div>
       <div class="actions">
-        <button
-          class="edit"
-          *ngIf="!ItemService.itemEditable"
-          (click)="ItemService.changeEditState()"
-        >
-          ✎
-        </button>
-        <button
-          *ngIf="!ItemService.itemEditable"
-          class="delete"
-          (click)="ItemService.deleteItem(item)"
-        >
+        <button class="edit" (click)="ItemService.changeEditState()">✎</button>
+        <button class="delete" (click)="ItemService.deleteItem(item)">
           🗑️
-        </button>
-        <button
-          *ngIf="ItemService.itemEditable"
-          class="save"
-          (click)="ItemService.editItem(item)"
-        >
-          Save
         </button>
       </div>
     </div>
