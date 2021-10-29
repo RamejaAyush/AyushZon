@@ -4,12 +4,18 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from '../app/services/auth.guard';
 import { InnerPageGuard } from '../app/services/inner-page.guard';
+import { AddItemComponent } from './components/add-item/add-item.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [InnerPageGuard] },
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'add-item',
+    component: AddItemComponent,
     canActivate: [AuthGuard],
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' },

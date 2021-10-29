@@ -8,6 +8,10 @@ import { ITEM } from './ITEMS';
 export class ItemsService {
   localItem: string;
   Items: ITEM[];
+  itemEditable: boolean = false;
+  newName: string;
+  newDesc: string;
+  newPrice: number;
 
   constructor(private router: Router) {
     this.localItem = localStorage.getItem('items');
@@ -48,5 +52,16 @@ export class ItemsService {
     this.Items.splice(index, 1);
     localStorage.setItem('items', JSON.stringify(this.Items));
     alert('Item removed');
+  }
+
+  changeEditState() {
+    this.itemEditable = !this.itemEditable;
+  }
+
+  editItem(item: ITEM) {
+    const index = this.Items.indexOf(item);
+    console.log(this.Items[index]);
+    // localStorage.setItem('items', JSON.stringify(this.Items));
+    // this.itemEditable = false;
   }
 }

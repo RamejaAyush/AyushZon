@@ -1,7 +1,12 @@
 <section class="dashboard">
   <div class="spacing"></div>
   <div class="header-dashboard">
-    <h1>Welcome {{ AuthService.userName }}!</h1>
+    <!-- <h1>Welcome {{ AuthService.userName }}!</h1> -->
+    <h1>
+      {{ ItemService.newName }} {{ ItemService.newDesc }}
+      {{ ItemService.newPrice }}
+    </h1>
+    <button (click)="goToAdd()">Add Item</button>
   </div>
   <div class="products">
     <div class="indicator">
@@ -21,22 +26,59 @@
         <p>Actions</p>
       </div>
     </div>
-    <div class="pro">
+    <div class="pro" *ngFor="let item of ItemService.Items">
       <div class="id">
-        <p>1.</p>
+        <p>{{ item.id }}.</p>
       </div>
       <div class="name">
-        <p>Pencil</p>
+        <input
+          *ngIf="ItemService.itemEditable"
+          type="text"
+          [(ngModel)]="ItemService.newName"
+          placeholder="Enter New Name"
+        />
+        <p *ngIf="!ItemService.itemEditable">{{ item.name }}</p>
       </div>
       <div class="desc">
-        <p>Unbreakable pencil.</p>
+        <input
+          *ngIf="ItemService.itemEditable"
+          type="text"
+          [(ngModel)]="ItemService.newDesc"
+          placeholder="Enter New Description"
+        />
+        <p *ngIf="!ItemService.itemEditable">{{ item.desc }}</p>
       </div>
       <div class="price">
-        <p>15</p>
+        <input
+          *ngIf="ItemService.itemEditable"
+          type="number"
+          [(ngModel)]="ItemService.newPrice"
+          placeholder="Enter New Price"
+        />
+        <p *ngIf="!ItemService.itemEditable">Rs {{ item.price }}</p>
       </div>
       <div class="actions">
-        <button class="edit">✎</button>
-        <button class="delete">🗑️</button>
+        <button
+          class="edit"
+          *ngIf="!ItemService.itemEditable"
+          (click)="ItemService.changeEditState()"
+        >
+          ✎
+        </button>
+        <button
+          *ngIf="!ItemService.itemEditable"
+          class="delete"
+          (click)="ItemService.deleteItem(item)"
+        >
+          🗑️
+        </button>
+        <button
+          *ngIf="ItemService.itemEditable"
+          class="save"
+          (click)="ItemService.editItem(item)"
+        >
+          Save
+        </button>
       </div>
     </div>
   </div>

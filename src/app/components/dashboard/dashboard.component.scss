@@ -12,7 +12,20 @@ section {
     height: 10vh;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
+
+    button {
+      padding: 5px 8px;
+      border-radius: 5px;
+      border: 1px solid skyblue;
+      background-color: skyblue;
+      color: rgb(0, 0, 0);
+      cursor: pointer;
+
+      &:hover {
+        background-color: rgb(46, 180, 233);
+      }
+    }
   }
 
   .products {

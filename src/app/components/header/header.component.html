@@ -3,8 +3,8 @@
     <h1>AyushZon</h1>
   </div>
   <div *ngIf="AuthService.currentLoginValue" class="nav-links">
-    <a href="#">Dashboard</a>
-    <a href="#">About</a>
+    <a routerLink="dashboard">Dashboard</a>
+    <a routerLink="about">About</a>
     <button (click)="AuthService.logOut()" class="logout">Logout</button>
   </div>
 </nav>
